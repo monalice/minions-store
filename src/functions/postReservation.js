@@ -6,7 +6,7 @@ const uuid = require('uuid');
 
 export const postReservation = async (event, context, callback) => {
     const body = JSON.parse(event.body);
-    const { minionsList, name, email, phone, cep, address } = body;
+    const { name, email, phone, address, cep, minionsList } = body;
     const time = dayjs().format('DD/MM/YYYY - HH:mm:ss');
 
     sendEmail(name, email, time, phone, minionsList);
@@ -44,7 +44,7 @@ function sendEmail(name, email, time, phone, minionsList) {
 
     const mailOptions = {
         from: '"Minions Store" <alicetestebgc@gmail.com>',
-        to: `${email}`,
+        to: `${email}, thiago@bgcbrasil.com.br`,
         subject: 'Your reservation',
         html: `<b>Thank you, ${name}, for shopping with us!</b><br>
         <p>Your reservation has been made ${time}</p>

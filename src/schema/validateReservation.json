@@ -5,8 +5,8 @@
         "name",
         "email",
         "phone",
-        "cep",
         "address",
+        "cep",
         "minionsList"
     ],
     "properties": {
@@ -14,7 +14,7 @@
             "type": "string",
             "title": "name",
             "minLength": 10,
-            "pattern": "[A-Z][a-z]* [A-Z][a-z]*"
+            "pattern": "^[A-Z][a-z]* [A-Z][a-z]*$"
         },
         "email": {
             "type": "string",
@@ -27,15 +27,15 @@
             "title": "phone",
             "pattern": "/([0-9]{2}/)([0-9]{5})-[0-9]{4}"
         },
-        "cep": {
-            "type": "string",
-            "title": "cep",
-            "pattern": "^([0-9]{5})-[0-9]{3}"
-        },
         "address": {
             "type": "string",
             "title": "address",
             "minLength": 10
+        },
+        "cep": {
+            "type": "string",
+            "title": "cep",
+            "pattern": "^([0-9]{5})-[0-9]{3}"
         },
         "minionsList": {
             "type": "array"
