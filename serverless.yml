@@ -1,0 +1,56 @@
+service: minions-store-api
+
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle 
+  - serverless-offline
+  - serverless-dotenv-plugin 
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: sa-east-1
+  memorySize: 512
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Scan
+        - dynamodb:PutItem
+        - dynamodb:GetItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:sa-east-1:*:*"
+
+functions:
+  getProducts:
+    handler: src/functions/getProducts.getProducts
+    events:
+      - http:
+          path: /products
+          method: get
+          cors: true
+  postReservation:
+    handler: src/functions/postReservation.postReservation
+    events:
+      - http:
+          path: /reservation
+          method: post
+          cors: true
+          request:
+            schema:
+              application/json: ${file(src/schema/validateReservation.json)}
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'

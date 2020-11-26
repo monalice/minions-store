@@ -1,0 +1,44 @@
+{
+    "definitions": {},
+    "type": "object",
+    "required": [
+        "name",
+        "email",
+        "phone",
+        "cep",
+        "address",
+        "minionsList"
+    ],
+    "properties": {
+        "name": {
+            "type": "string",
+            "title": "name",
+            "minLength": 10,
+            "pattern": "[A-Z][a-z]* [A-Z][a-z]*"
+        },
+        "email": {
+            "type": "string",
+            "title": "email",
+            "minLength": 8,
+            "maxLength": 35
+        },
+        "phone": {
+            "type": "string",
+            "title": "phone",
+            "pattern": "/([0-9]{2}/)([0-9]{5})-[0-9]{4}"
+        },
+        "cep": {
+            "type": "string",
+            "title": "cep",
+            "pattern": "^([0-9]{5})-[0-9]{3}"
+        },
+        "address": {
+            "type": "string",
+            "title": "address",
+            "minLength": 10
+        },
+        "minionsList": {
+            "type": "array"
+        }
+    }
+}
